@@ -1,0 +1,14 @@
+.card-ev{
+    text-align: left !important;
+    border: none;
+    border-radius: 15px;
+}
+
+#dash{
+    text-align: left;
+}
+
+.bg-cus{
+    color: #fff;
+    background-color: #ff914d;
+}

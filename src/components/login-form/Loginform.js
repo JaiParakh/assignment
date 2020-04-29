@@ -31,7 +31,17 @@ class LoginForm extends Component{
             email: this.state.email,
             password: this.state.password
         }
-        console.log(user);
+        
+        axios.post("user/authenticate", user).then(res => {
+            
+            const {history} = this.props;
+            console.log(res.data);
+            if(res.data.success){
+                store.set('loggedIn', true);
+                store.set('id', res.data.user.id);
+                history.push('/maps');
+            }
+        });
     }
 
     render(){

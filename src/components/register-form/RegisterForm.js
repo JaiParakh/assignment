@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
-import {Route, Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import './RegisterForm.css';
+import axios from 'axios';
+import store from 'store';
 
 class RegisterForm extends Component{
     constructor(props){
@@ -37,6 +39,21 @@ class RegisterForm extends Component{
 
     submitData = (e) => {
         e.preventDefault();
+        const user = {
+            name: this.state.name,
+            email: this.state.email,
+            password: this.state.password,
+            organisation: this.state.organisation
+        }
+        axios.post("user/register", user).then(res => {
+            const {history} = this.props;
+            console.log(res.data);
+            if(res.data.success){
+                store.set('loggedIn', true);
+                store.set('id', res.data.data._id);
+                history.push('/maps');
+            }
+        });
     }
 
     render(){
