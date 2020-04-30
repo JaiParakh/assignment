@@ -15,19 +15,24 @@ class Dashboard extends Component{
     }
 
     componentDidMount(){
-
+        axios.get('/event/events').then(res => {
+            this.setState({events: res.data})
+        })
     }
 
     render(){
         if (!isLoggedIn()) {
 			return(<Redirect to="/login" />);	
-		}
+        }
+        var events_list = this.state.events.map(per => {
+			return (<EventCard title={per.title} description={per.description} date={per.date} form_link={per.form_link} />) 
+        });
         return(
             <Layout>
                 <div className="container" id="dash">
-                    <EventCard title="Yolo" description="hjhjhjhjhjhj" date="5/6/2019" />
-                    <EventCard title="Yolo" description="hjhjhjhjhjhj" date="5/6/2019" />
-                    <EventCard title="Yolo" description="hjhjhjhjhjhj" date="5/6/2019" />
+                    {
+                        events_list
+                    }
                 </div>
             </Layout>
         )

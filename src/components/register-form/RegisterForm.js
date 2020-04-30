@@ -51,7 +51,7 @@ class RegisterForm extends Component{
             if(res.data.success){
                 store.set('loggedIn', true);
                 store.set('id', res.data.data._id);
-                history.push('/maps');
+                history.push('/home');
             }
         });
     }

@@ -39,7 +39,7 @@ class LoginForm extends Component{
             if(res.data.success){
                 store.set('loggedIn', true);
                 store.set('id', res.data.user.id);
-                history.push('/maps');
+                history.push('/home');
             }
         });
     }

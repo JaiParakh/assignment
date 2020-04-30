@@ -62,6 +62,22 @@ class AddEvent extends Component{
 
     submitData(e){
         e.preventDefault();
+        const event = {
+            title: this.state.title,
+            organizer: this.state.organizer,
+            date: this.state.date,
+            description: this.state.description,
+            form_link: this.state.form_link
+        }
+        axios.post("event/add", event).then(res => {
+            const {history} = this.props;
+            console.log(res.data);
+            if(res.data.success){
+                store.set('loggedIn', true);
+                store.set('id', res.data.data._id);
+                history.push('/home');
+            }
+        });
     }
 
     render(){
